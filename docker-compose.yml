@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  server:
+    build: ./
+    
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - 1885:1883
