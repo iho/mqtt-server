@@ -27,21 +27,25 @@ func NewServer(store db.DBStore, logger *zap.SugaredLogger, client mqtt.Client, 
 }
 
 func (s *Server) Run() {
-	token := s.client.Subscribe(s.config.MQTTTopic, 1, s.messageHandler)
+	token := s.client.Subscribe(s.config.MQTTTopic, 1, s.MessageHandler)
 	token.Wait()
 }
 
-func (s *Server) messageHandler(client mqtt.Client, msg mqtt.Message) {
+func (s *Server) MessageHandler(client mqtt.Client, msg mqtt.Message) {
 	s.logger.Debugf("Received message: %s from topic: %s\n", msg.Payload(), msg.Topic())
 
 	message := models.Message{}
 
 	if err := json.Unmarshal(msg.Payload(), &message); err != nil {
 		s.logger.Error(err)
+
+		return
 	}
 
 	if err := s.store.InsertMessage(message); err != nil {
 		s.logger.Error(err)
+
+		return
 	}
 	s.logger.Debug("Message succesfully inserted")
 }
