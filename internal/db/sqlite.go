@@ -27,7 +27,7 @@ func (store *sqliteStore) AllMessages() ([]models.Message, error) {
 
 	rows, err := store.DB.Query("select * from messages")
 	if err != nil {
-		return nil, err
+		return messages, err
 	}
 	defer rows.Close()
 
@@ -43,7 +43,7 @@ func (store *sqliteStore) AllMessages() ([]models.Message, error) {
 	}
 
 	if err = rows.Err(); err != nil {
-		return nil, err
+		return messages, err
 	}
 
 	return messages, nil

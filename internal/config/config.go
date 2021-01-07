@@ -12,8 +12,8 @@ type Config struct {
 	Broker    string `json:"broker"`
 }
 
-func ReadConfig() (*Config, error) {
-	file, err := os.Open("./conf.json")
+func ReadConfig(path string) (*Config, error) {
+	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}

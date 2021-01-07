@@ -18,7 +18,7 @@ func main() {
 	defer logger.Sync() // nolint: errcheck
 	log := logger.Sugar()
 
-	conf, err := config.ReadConfig()
+	conf, err := config.ReadConfig("./conf.json")
 	if err != nil {
 		log.Fatal(err) // nolint: gocritic
 	}
