@@ -19,3 +19,9 @@ To check if everything works right send test message with this command:
 ```
 mosquitto_pub -t test/topic -m "{\"message\": \"test\", \"name\": \"mike\"}" -p 1885
 ```
+
+
+## How to run tests
+```
+go test ./internal/server
+```
