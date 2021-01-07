@@ -1,6 +1,6 @@
 {
   "DSN": "./test.db",
   "topic": "test/topic",
-  "port": "1883",
+  "port": 1883,
   "broker": "localhost"
 }
